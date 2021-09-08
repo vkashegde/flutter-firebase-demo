@@ -1,24 +1,20 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firelearn/screens/home_screen.dart';
-import 'package:firelearn/screens/login_screen.dart';
+import 'package:firelearn/screens/register_screen.dart';
 import 'package:firelearn/services/auth_service.dart';
 import 'package:flutter/material.dart';
-import 'package:firelearn/extensions/validator.dart';
-import 'package:flutter_signin_button/flutter_signin_button.dart';
 
-class RegisterScreen extends StatefulWidget {
+// ignore: must_be_immutable
+class LoginScreen extends StatefulWidget {
   @override
-  _RegisterScreenState createState() => _RegisterScreenState();
+  _LoginScreenState createState() => _LoginScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _LoginScreenState extends State<LoginScreen> {
   TextEditingController emailCont = TextEditingController();
 
   TextEditingController passwordCont = TextEditingController();
-
-  TextEditingController confirmCont = TextEditingController();
   bool isLoading = false;
-
   @override
   void initState() {
     super.initState();
@@ -28,7 +24,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Register'),
+        title: Text('Login'),
         centerTitle: true,
       ),
       body: Container(
@@ -62,20 +58,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
             SizedBox(
               height: 30,
             ),
-            TextField(
-              obscureText: true,
-              controller: confirmCont,
-              decoration: InputDecoration(
-                labelText: "Confirm Password",
-                isDense: true,
-                contentPadding:
-                    EdgeInsets.symmetric(horizontal: 12, vertical: 12),
-                border: OutlineInputBorder(),
-              ),
-            ),
-            SizedBox(
-              height: 30,
-            ),
             isLoading
                 ? CircularProgressIndicator()
                 : Container(
@@ -89,11 +71,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         if (emailCont.text == '' || passwordCont == '') {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content: Text('All Fields are required')));
-                        } else if (passwordCont.text != confirmCont.text) {
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content: Text('Passwords don\'t match')));
                         } else {
-                          User result = await AuthService().register(
+                          User result = await AuthService().login(
                               emailCont.text, passwordCont.text, context);
 
                           if (result != null) {
@@ -111,7 +90,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         });
                       },
                       child: Text(
-                        'Submit',
+                        'Login',
                         style: TextStyle(
                             fontSize: 25, fontWeight: FontWeight.bold),
                       ),
@@ -124,32 +103,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 onPressed: () {
                   Navigator.pushAndRemoveUntil(
                       context,
-                      MaterialPageRoute(builder: (context) => LoginScreen()),
+                      MaterialPageRoute(builder: (context) => RegisterScreen()),
                       (route) => false);
                 },
-                child: Text('Already have a account ?  Login here')),
-            SizedBox(
-              height: 10,
-            ),
-            Divider(),
-            SizedBox(
-              height: 10,
-            ),
-            isLoading
-                ? CircularProgressIndicator()
-                : SignInButton(
-                    Buttons.Google,
-                    text: 'Continue with Google',
-                    onPressed: () async {
-                      setState(() {
-                        isLoading = true;
-                      });
-                      await AuthService().signinwithgoogle();
-                      setState(() {
-                        isLoading = false;
-                      });
-                    },
-                  ),
+                child: Text('Don\'t have a account ?  Register here'))
           ],
         ),
       ),
