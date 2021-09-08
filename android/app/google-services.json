@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "496082100288",
+    "project_id": "flutterfirebase-604b8",
+    "storage_bucket": "flutterfirebase-604b8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:496082100288:android:a9cc24b2c0b851a6b47fa5",
+        "android_client_info": {
+          "package_name": "com.example.firelearn"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "496082100288-g0j09cnp5m2vcok1b672v0sugqsutlhr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjeiafT7ZWn66XNOm9WFbezpohdtO7gi0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "496082100288-g0j09cnp5m2vcok1b672v0sugqsutlhr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
